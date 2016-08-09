@@ -1,0 +1,9 @@
+.idea
+*.iml
+~
+target
+logs/*
+lib/*.jar
+flags/*.done
+flags/*.failed
+flags/*.busy
