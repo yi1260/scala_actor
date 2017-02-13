@@ -1,10 +1,9 @@
-package lius
+package org.sun.lius
 
-import akka.actor.{Actor,ActorSystem, Props}
-import akka.pattern.ask
-import akka.util.Timeout
+import akka.actor.{ActorSystem, Props}
+import lius.WordCounterActor
+
 import scala.concurrent.duration._
-import akka.dispatch.ExecutionContexts._
 
 /**
   * Created by Administrator on 2016/8/9.
@@ -14,8 +13,11 @@ object App{
   def main(args : Array[String]): Unit ={
     val system = ActorSystem("wordCount_system")
     val actor = system.actorOf(Props(new WordCounterActor("C:\\Users\\Administrator\\Desktop\\aaa.txt")))
-    actor ! startProcessFileMsg()
-    Thread.sleep(2000)
+
+    import system.dispatcher
+    val cancellable = system.scheduler.schedule(0 seconds, 1 seconds, actor, startProcessFileMsg())
+//    actor ! startProcessFileMsg()
+    Thread.sleep(1000)
     system.shutdown
 
     //采用同步方式
@@ -27,14 +29,3 @@ object App{
   }
 }
 
-
-class App extends Actor{
-  def receive = {
-    case  resultMsg(result) => {
-      println(result)
-    }
-    case _ => {
-      println("error:message not recognized!")
-    }
-  }
-}

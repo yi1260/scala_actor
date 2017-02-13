@@ -1,5 +1,6 @@
-package lius
-import akka.actor.{Actor, ActorRef, ActorSystem, Props}
+package org.sun.lius
+
+import akka.actor.{Actor, ActorRef, Props}
 
 import scala.io.Source._
 

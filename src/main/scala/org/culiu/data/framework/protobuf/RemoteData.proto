@@ -1,0 +1,19 @@
+syntax = "proto2";
+package org.culiu.data.framework.protobuf;
+option java_outer_classname = "RemoteData";
+
+message OriData {
+  required string strategy = 1;
+  required string common_fea_key = 2;
+  repeated string non_com_fea_key_list = 3;
+}
+
+message ResultData {
+  required string comFeaKey = 1;
+  repeated NonComFeaKey2Score result = 2;
+}
+
+message NonComFeaKey2Score {
+  required string key = 1;
+  required double score = 2;
+}
